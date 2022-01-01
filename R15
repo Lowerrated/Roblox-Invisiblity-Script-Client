@@ -1,0 +1,12 @@
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local Character = Player.Character
+local Pre = Instance.new('Vector3Value')
+local move = Instance.new('BodyPosition')
+Character.LowerTorso:Destroy()
+Pre.Value = Character.HumanoidRootPart.Position
+move.Parent = Character.Head
+move.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+move.P = 100000
+move.Position = Vector3.new(0, 1000000, 0)
+Character.HumanoidRootPart.Position = Pre.Value
