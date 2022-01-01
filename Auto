@@ -1,0 +1,6 @@
+local Character = game:GetService('Players').LocalPlayer.Character
+if Character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Lowerrated/Roblox-Invisiblity-Script-Client/main/R15",true))()
+else
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Lowerrated/Roblox-Invisiblity-Script-Client/main/R6",true))()
+end
