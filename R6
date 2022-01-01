@@ -1,0 +1,50 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Block128/Netless-Bypass/main/Netless%20Bypass",true))()
+local RunService = game:GetService('RunService')
+local Players = game:GetService('Players')
+local Player = Players.LocalPlayer
+local Character = Player.Character
+local Rig = Instance.new('Model')
+local RigHRP = Instance.new('Part')
+local Humanoid = Instance.new('Humanoid')
+local A0 = Instance.new('Attachment')
+local AP = Instance.new('AlignPosition')
+local AO = Instance.new('AlignOrientation')
+local A1 = Instance.new('Attachment')
+Rig.Parent = workspace
+RigHRP.Parent = Rig
+Humanoid.Parent = Rig
+RigHRP.Transparency = 1
+RigHRP.Size = Character.HumanoidRootPart.Size
+RigHRP.Position = Character.HumanoidRootPart.Position
+Humanoid.HipHeight = Character.Humanoid.HipHeight
+Character:MoveTo(Vector3.new(100, 100, 100))
+Instance.new('BodyVelocity', Character.Torso).Velocity = Vector3.new()
+Character.HumanoidRootPart:BreakJoints()
+A0.Parent = Character.HumanoidRootPart
+AP.Parent = Character.HumanoidRootPart
+AO.Parent = Character.HumanoidRootPart
+AP.MaxForce = math.huge
+AP.Responsiveness = 200
+AO.MaxTorque = math.huge
+AO.Responsiveness = 200
+A1.Parent = RigHRP
+AP.Attachment0 = A0
+AP.Attachment1 = A1
+AO.Attachment0 = A0
+AO.Attachment1 = A1
+Character.HumanoidRootPart.Position = RigHRP.Position
+spawn(function()
+	for _, ServerPlayer in pairs(Players:GetPlayers()) do
+		if ServerPlayer.Name == Player.Name then
+			RunService.Stepped:Connect(function()
+				settings().Physics.AllowSleep = false
+				setsimulationradius(math.huge*math.huge, math.huge*math.huge)
+			end)
+		else
+			RunService.Stepped:Connect(function()
+				sethiddenproperty(ServerPlayer, 'MaximumSimulationRadius', 0)
+				sethiddenproperty(ServerPlayer, 'SimulationRadius', 0)
+			end)
+		end
+	end
+end)
